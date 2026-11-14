@@ -1,0 +1,143 @@
+% =====================================================================
+%  Lab 2 -- User Personas, Scenarios and User Stories
+%  ZoneSense: Smart Zone Environmental Monitoring and HVAC Control System
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\input{preamble}
+
+\newcommand{\ShortTitle}{ZoneSense -- Lab 2: User Personas}
+\newcommand{\LabTitle}{Lab 2: User Personas, Scenarios and User Stories}
+\newcommand{\ProjectTitle}{ZoneSense: Smart Zone Environmental Monitoring and HVAC Control System}
+\newcommand{\TeamMembers}{%
+  Remas Rawas --- ID: S24109161\\[6pt]
+  Bayan Abduldaym --- ID: S24109196\\[6pt]
+  Ghala Bin Salim --- ID: S24109159}
+
+\counterwithin{table}{section}
+
+% Priority cells (Part 3)
+\definecolor{zmust}{HTML}{E2F3F1}
+\definecolor{zshould}{HTML}{FDF3DC}
+\newcommand{\must}{\cellcolor{zmust}Must}
+\newcommand{\should}{\cellcolor{zshould}Should}
+
+\begin{document}
+\makecover
+
+\section{User Persona Development}
+
+% ---------------------------------------------------------------------
+\subsection*{Part 1 -- Identify User Groups}
+
+{\small\stripe
+\begin{xltabular}{\linewidth}{|B{3.3cm}|Y|L{2.3cm}|L{2.4cm}|}
+\caption{User groups}\label{tab:groups}\\
+\hline\headrow
+\hd{User Group} & \hd{Role} & \hd{Frequency of Use} & \hd{Technical Level}\\\hline
+\endfirsthead
+\hline\headrow
+\hd{User Group} & \hd{Role} & \hd{Frequency of Use} & \hd{Technical Level}\\\hline
+\endhead
+Building Resident & Monitors environmental conditions across building zones, reviews alerts and proposed control actions, and approves or rejects all proposed control actions before execution. & Daily & Moderate\\\hline
+HVAC Maintenance Technician & Investigates environmental or HVAC-related problems that require technical intervention, reviews relevant system information, performs maintenance when needed, and records the resolution. & As needed & Moderate--High\\\hline
+\end{xltabular}}
+
+\begin{zinfo}
+\textbf{Note:} Building owners are considered stakeholders and potential customers of the system. The primary operational users are the Building Resident and HVAC Maintenance Technician.
+\end{zinfo}
+
+% ---------------------------------------------------------------------
+\subsection*{Part 2 -- Persona Creation}
+
+\subsubsection*{Persona 1 -- Building Resident}
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Persona 1 -- Building Resident}\label{tab:p1}
+{\small\stripe
+\begin{tabularx}{\linewidth}{|B{3.6cm}|Y|}
+\hline\headrow \hd{Field} & \hd{Information}\\\hline
+Persona & Building Resident\\\hline
+Age & Adult\\\hline
+Education & No specific educational background is required.\\\hline
+Role Goals & Oversee environmental conditions across building zones, identify abnormal conditions, make informed decisions about proposed control actions, and coordinate responses when intervention is required.\\\hline
+Motivations & Maintain a safe and comfortable building environment, identify environmental problems before they worsen, and respond efficiently to abnormal conditions.\\\hline
+Pain Points & Difficulty identifying important problems when many sensor readings are available, delayed awareness of abnormal conditions, and difficulty determining which zone requires attention first.\\\hline
+Technical Skill Level & Moderate\\\hline
+Usage Context & The Building Resident uses the system to monitor environmental conditions across building zones. When an abnormal condition is detected, the Building Resident reviews the affected zone, relevant readings, and alert details. If the system proposes a control action, an authorized Building Resident can review and approve or reject the proposed action before execution. The Building Resident can also monitor subsequent conditions to determine whether the issue has improved.\\\hline
+\end{tabularx}}
+\end{minipage}
+\medskip
+
+\subsubsection*{Persona 2 -- HVAC Maintenance Technician}
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Persona 2 -- HVAC Maintenance Technician}\label{tab:p2}
+{\small\stripe
+\begin{tabularx}{\linewidth}{|B{3.6cm}|Y|}
+\hline\headrow \hd{Field} & \hd{Information}\\\hline
+Persona & HVAC Maintenance Technician\\\hline
+Age & Adult\\\hline
+Education & Diploma in HVAC and Mechanical Systems\\\hline
+Role Goals & Identify the source of environmental or HVAC-related problems, review relevant environmental readings and alert information, inspect affected equipment, perform required maintenance, and document the resolution.\\\hline
+Motivations & Keep building systems operating correctly, resolve technical problems efficiently, and reduce unnecessary troubleshooting.\\\hline
+Pain Points & Difficulty locating the source of a problem, insufficient information about the affected zone before investigation, and time spent checking equipment when the cause of the problem is unclear.\\\hline
+Technical Skill Level & Moderate--High\\\hline
+Usage Context & The HVAC Maintenance Technician uses the system when an environmental condition requires technical investigation or maintenance. The technician reviews the affected zone, relevant readings, and alert information before inspecting the related sensor or HVAC equipment. The technician records maintenance progress and resolution in the system and reviews subsequent readings to determine whether the condition has improved.\\\hline
+\end{tabularx}}
+\end{minipage}
+\medskip
+
+% ---------------------------------------------------------------------
+\subsection*{Part 3 -- Persona to Requirements Mapping}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Persona to requirements mapping}\label{tab:mapping}
+{\small
+\begin{tabularx}{\linewidth}{|B{3.9cm}|Y|C{1.6cm}|}
+\hline\headrow
+\hd{Persona} & \hd{Feature Needed} & \hd{Priority}\\\hline
+Building Resident & View the environmental condition of each building zone and quickly identify zones that require attention. & \must\\\hline
+Building Resident & View current temperature, \COtwo, humidity, and sound-level readings for each zone. & \must\\\hline
+Building Resident & Receive alerts that identify the affected zone and abnormal environmental condition. & \must\\\hline
+Building Resident & Review proposed control actions for controllable abnormal conditions. & \must\\\hline
+Building Resident & Approve or reject proposed control actions before execution. & \must\\\hline
+Building Resident & Review previous alerts, approval decisions, and executed control actions associated with a zone. & \should\\\hline
+Building Resident & Monitor the affected zone after an approved control action to determine whether the environmental condition improves. & \must\\\hline
+HVAC Maintenance Technician & View the affected zone, abnormal condition, relevant environmental readings, and alert details needed for technical investigation. & \must\\\hline
+HVAC Maintenance Technician & View information about control actions associated with the environmental incident. & \should\\\hline
+HVAC Maintenance Technician & View updated environmental readings after maintenance to determine whether the condition has improved. & \must\\\hline
+HVAC Maintenance Technician & Record the maintenance work performed, its status, and whether the technical problem was resolved. & \should\\\hline
+\end{tabularx}}
+\end{minipage}
+
+% ---------------------------------------------------------------------
+\subsection*{Part 4 -- Scenarios and User Stories}
+
+\subsubsection*{Persona 1 -- Building Resident}
+
+\keephead{Usage Scenario}
+During the day, the Building Resident uses ZoneSense to monitor environmental conditions across the building and identify zones that require attention. When an abnormal condition occurs, the Building Resident reviews the affected zone, environmental readings, and alert information. If a supported control action is proposed, an authorized Building Resident reviews the proposal and decides whether to approve or reject it. If approved, the system executes the control action; if rejected, it does not. The Building Resident then continues monitoring the affected zone to determine whether the condition improves.
+
+\keephead{User Stories}
+\begin{enumerate}[itemsep=3pt]
+\item As a Building Resident, I want to view the environmental condition of each building zone so that I can quickly identify zones that require attention.
+\item As a Building Resident, I want to view temperature, \COtwo, humidity, and sound-level readings for each zone so that I can understand its current environmental condition.
+\item As a Building Resident, I want to receive alerts that identify the affected zone and abnormal environmental condition so that I can respond promptly.
+\item As a Building Resident, I want to review a proposed control action for a controllable abnormal condition so that I can decide whether it should be executed.
+\item As a Building Resident, I want to approve or reject a proposed control action so that no control action is executed without my authorization.
+\item As a Building Resident, I want to monitor the affected zone after an approved control action is executed so that I can determine whether the environmental condition improves.
+\item As a Building Resident, I want to review previous alerts, approval decisions, and executed control actions so that I can review the history of environmental incidents in a zone.
+\end{enumerate}
+
+\subsubsection*{Persona 2 -- HVAC Maintenance Technician}
+
+\keephead{Usage Scenario}
+When an environmental condition requires technical investigation or maintenance, the HVAC Maintenance Technician reviews the affected zone, abnormal condition, relevant environmental readings, and alert details. The technician also reviews information about any control actions associated with the incident. Using this information, the technician identifies what requires inspection and examines the relevant sensor or HVAC equipment. The technician performs the necessary maintenance and records the work performed, its status, and whether the technical problem was resolved. After maintenance, the technician reviews updated environmental readings to determine whether the condition has improved.
+
+\keephead{User Stories}
+\begin{enumerate}[itemsep=3pt]
+\item As an HVAC Maintenance Technician, I want to view the affected zone, abnormal condition, relevant environmental readings, and alert details so that I can determine what requires technical investigation.
+\item As an HVAC Maintenance Technician, I want to view information about control actions associated with the environmental incident so that I know what actions have already been taken.
+\item As an HVAC Maintenance Technician, I want to record the maintenance work performed, its status, and whether the technical problem was resolved so that the progress and outcome of the investigation are documented.
+\item As an HVAC Maintenance Technician, I want to view updated environmental readings after maintenance so that I can determine whether the condition has improved.
+\end{enumerate}
+
+\end{document}

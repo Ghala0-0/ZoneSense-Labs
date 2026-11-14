@@ -1,0 +1,108 @@
+% =====================================================================
+%  Lab 3 -- Transforming User Stories to Requirements
+%  ZoneSense: Smart Zone Environmental Monitoring and HVAC Control System
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\input{preamble}
+
+\newcommand{\ShortTitle}{ZoneSense -- Lab 3: Requirements Specification}
+\newcommand{\LabTitle}{Lab 3: Transforming User Stories to Requirements}
+\newcommand{\ProjectTitle}{ZoneSense: Smart Zone Environmental Monitoring and HVAC Control System}
+\newcommand{\TeamMembers}{%
+  Remas Rawas --- ID: S24109161\\[6pt]
+  Bayan Abduldaym --- ID: S24109196\\[6pt]
+  Ghala Bin Salim --- ID: S24109159}
+
+\counterwithin{table}{section}
+
+% Requirement table: ID | Requirement
+\newcommand{\reqhead}[1]{%
+  \caption{#1}\\
+  \hline\headrow \hd{ID} & \hd{Requirement}\\\hline
+  \endfirsthead
+  \hline\headrow \hd{ID} & \hd{Requirement}\\\hline
+  \endhead}
+% Non-functional requirement: name in bold, statement below
+\newcommand{\nfr}[2]{\textbf{#1}\newline #2}
+
+\begin{document}
+\makecover
+
+% ---------------------------------------------------------------------
+\section{Requirements Analysis}
+
+\subsection{Functional Requirements}
+
+{\small\stripe
+\begin{xltabular}{\linewidth}{|B{1.3cm}|Y|}
+\reqhead{Functional requirements}\label{tab:fr}
+FR1 & The system shall allow an authorized Building Resident to configure and uniquely identify up to 20 monitoring zones within one building, with each zone assigned a unique ID and name.\\\hline
+FR2 & The system shall receive 4 environmental measurement types---temperature, \COtwo, humidity, and sound level---from each configured zone at least once every 60 seconds during normal sensor operation.\\\hline
+FR3 & The system shall store 100\% of received sensor readings with the associated zone ID, sensor type, measured value, and timestamp.\\\hline
+FR4 & The system shall display the most recently received temperature, \COtwo, humidity, and sound-level readings for each monitored zone within 8 seconds of receiving updated data.\\\hline
+FR5 & For each newly received environmental reading, the system shall compare the value with its configured thresholds and determine its measurement severity, and recompute the zone status using FR6 within 5 seconds.\\\hline
+FR6 & The system shall display exactly one zone status using this priority: critical if any available sensor is critical; otherwise warning if any available sensor is warning; otherwise unavailable if any configured sensor is unavailable; otherwise normal. The display shall update within 8 seconds of a status change. Each sensor's availability shall be shown separately, so missing data never hides a known critical or warning condition.\\\hline
+FR7 & The system shall create an alert-history record for every detected threshold violation within 45 seconds. It shall display a new alert notification within 45 seconds for the first violation, a severity change, or a continuing violation after the repeat interval expires. Unchanged-severity repeat notifications within the interval shall be suppressed under FR22; their history records shall still be stored.\\\hline
+FR8 & 100\% of generated environmental alerts shall contain the affected zone, abnormal environmental measurement, current reading, and alert severity when displayed.\\\hline
+FR9 & For each detected abnormal temperature, \COtwo, or humidity condition that can be addressed through a supported control function, the system shall determine and display one proposed control action within 10 seconds of identifying the controllable condition.\\\hline
+FR10 & The system shall require authorized Building Resident approval for 100\% of proposed control actions and shall execute 0 proposed control actions before approval is recorded.\\\hline
+FR11 & The system shall allow the authorized Building Resident to approve or reject 100\% of pending proposed control actions, and shall record the selected decision within 2 seconds of submission.\\\hline
+FR12 & When the authorized Building Resident approves a proposed control action, the system shall send the approved action to the supported control function within 2 seconds of approval.\\\hline
+FR13 & When the authorized Building Resident rejects a proposed control action, the system shall execute 0\% of rejected actions and mark the proposal as rejected within 2 seconds of the decision.\\\hline
+FR14 & The system shall record 100\% of Building Resident approval and rejection decisions with the associated proposed control action, Building Resident identifier, decision, and timestamp within 5 seconds of the decision.\\\hline
+FR15 & After an approved control action or recorded maintenance activity, the system shall continue receiving readings from the affected zone at intervals of no more than 60 seconds and update its environmental status within 5 seconds of each new reading.\\\hline
+FR16 & When an HVAC Maintenance Technician opens an environmental incident, the system shall display the affected zone, abnormal condition, relevant environmental readings, alert details, and associated control-action information within 10 seconds.\\\hline
+FR17 & The system shall allow the HVAC Maintenance Technician to record the maintenance work performed, its status, and whether the technical problem was resolved, and shall store 100\% of submitted maintenance records within 5 seconds of submission.\\\hline
+FR18 & The system shall store 100\% of generated environmental alerts, Building Resident approval and rejection decisions, executed control actions, and recorded maintenance activities for at least 12 months.\\\hline
+FR19 & The system shall allow the Building Resident to retrieve and view previous alerts, approval decisions, and executed control actions associated with a selected zone within 10 seconds of the request.\\\hline
+FR20 & The system shall require successful authentication before granting access to 100\% of protected system functions and shall grant or deny an authentication attempt within 5 seconds of valid credential submission.\\\hline
+FR21 & For 100\% of protected function requests, the system shall verify the authenticated user's assigned role before granting access and shall deny 100\% of requests for functions not permitted to that role.\\\hline
+FR22 & The authorized Building Resident shall be able to set a repeat-notification interval for each zone and measurement type from 1 to 60 minutes (default 10 minutes), measured from the last displayed notification. During a continuing abnormal condition of unchanged severity, the system shall suppress repeat notifications within this interval, update the zone status within 8 seconds of each reading, and record every violation in alert history with its notification disposition. A severity change shall bypass suppression and be notified within 45 seconds. A normal reading ends the abnormal episode; its next violation shall be treated as a first violation.\\\hline
+\end{xltabular}}
+
+\subsection{Non-Functional Requirements}
+
+{\small\stripe
+\begin{xltabular}{\linewidth}{|B{1.3cm}|Y|}
+\reqhead{Non-functional requirements}\label{tab:nfr}
+NFR1 & \nfr{Performance}{The system shall update the monitoring interface with newly received environmental sensor data within 8 seconds of receiving the data during normal operation.}\\\hline
+NFR2 & \nfr{Alert Response Time}{The system shall record 100\% of detected threshold violations in alert history within 45 seconds. It shall display 100\% of notifications eligible under FR7 and FR22 within 45 seconds of detection; suppressed repeat notifications are exempt from display, but not from history recording.}\\\hline
+NFR3 & \nfr{Availability}{If a configured sensor fails to provide data for 3 consecutive 60-second reporting intervals, the system shall mark that sensor unavailable within 8 seconds after the third missed interval, show its availability separately, and recompute the zone status using FR6. Stale readings shall not be used as current readings; receipt of fresh data shall restore that sensor's availability and trigger status recomputation.}\\\hline
+NFR4 & \nfr{Security}{The system shall require successful authentication for 100\% of attempts to access protected monitoring, maintenance, approval, configuration, and control functions.}\\\hline
+NFR5 & \nfr{Authorization}{The system shall verify the authenticated user's assigned role for 100\% of protected function requests and shall permit 0 requests for functions not authorized for that role.}\\\hline
+NFR6 & \nfr{Auditability}{The system shall create an audit record for 100\% of approval decisions, executed control actions, and maintenance activities, containing the responsible user, timestamp, action or decision, and result, within 5 seconds of the event.}\\\hline
+NFR7 & \nfr{Data Integrity}{The system shall preserve the correct zone ID, sensor type, measured value, and timestamp for 100\% of stored sensor readings, with 0 stored readings permitted to exist without all four required attributes.}\\\hline
+NFR8 & \nfr{Reliability}{A failure or loss of data from any single sensor shall not interrupt the processing or display of data from the remaining functioning sensors and zones, and functioning sensor data shall continue to be displayed within the normal 8-second interface-update target.}\\\hline
+NFR9 & \nfr{Usability}{The monitoring interface shall use the same four zone status categories---normal, warning, critical, and unavailable---and the FR6 priority on every screen displaying zone status. Each configured sensor's availability shall be visible separately on the zone-detail view.}\\\hline
+NFR10 & \nfr{Privacy}{The sound-monitoring component shall process and store sound-level values only, and the system shall record or store 0 audio recordings and 0 audio conversations during operation.}\\\hline
+NFR11 & \nfr{Maintainability}{An authorized Building Resident shall be able to change environmental thresholds and monitoring-zone configuration through the system interface without modifying source code, and a saved configuration change shall become active within 5 seconds.}\\\hline
+NFR12 & \nfr{Scalability}{The system shall support up to 20 monitoring zones with 4 environmental measurement types per zone, for up to 80 environmental measurement streams, without redesign of the core monitoring architecture and while maintaining the specified interface and alert performance targets.}\\\hline
+NFR13 & \nfr{Transport Security}{The system shall encrypt 100\% of connections between the browser and the application server, the sensor gateway and the application server, and the application server and the database using TLS 1.2 or higher, and shall store 0 user passwords in plain text (hashed storage only), in the prototype deployment.}\\\hline
+\end{xltabular}}
+
+% ---------------------------------------------------------------------
+\clearpage
+\section{Requirements Elicitation Methods}
+The requirements for the proposed ZoneSense system were developed using the following approaches:
+
+\subsection{Competitor Analysis}
+Existing building management solutions from Siemens, Johnson Controls, Schneider Electric, and Honeywell were reviewed to identify common monitoring, alerting, and HVAC control capabilities.
+
+\subsection{Review Analysis}
+Publicly available user feedback and reviews of building management solutions were examined to identify potential usability concerns and operational challenges.
+
+\subsection{Persona and Scenario Analysis}
+Two personas were developed: the Building Resident and the HVAC Maintenance Technician. Their responsibilities, goals, and challenges were used to create usage scenarios and user stories.
+
+\subsection{User Story Analysis}
+The user stories were translated into functional and non-functional requirements and refined using SMART criteria to improve clarity, measurability, and testability.
+
+\subsection*{Planned Validation Activities}
+The following activities are proposed for later project stages and have not yet been conducted:
+\begin{itemize}
+\item \textbf{Stakeholder Interviews:} Gather feedback from facility management and HVAC maintenance personnel.
+\item \textbf{Prototype Evaluation:} Present a working prototype to potential users to assess the proposed workflow and identify necessary improvements.
+\end{itemize}
+These activities will help validate the requirements against actual stakeholder needs.
+
+\end{document}

@@ -1,0 +1,159 @@
+% =====================================================================
+%  ZoneSense lab reports -- shared preamble
+%  CS3151 Software Engineering, Effat University, Fall 2026
+%  Compiler: pdfLaTeX (Overleaf default)
+% =====================================================================
+
+% ---------- Fonts and encoding ----------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}               % Latin Modern for typewriter text
+\usepackage{mathptmx}              % Times for body text
+\usepackage[scaled=0.90]{helvet}   % Helvetica for table headers and captions
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{microtype}
+
+% ---------- Page layout ----------
+\usepackage[a4paper,top=2.2cm,bottom=2.2cm,left=2.2cm,right=2.2cm,headheight=16pt]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 1pt}
+\linespread{1.08}
+\setlength{\emergencystretch}{2em}
+
+% ---------- Colours (taken from the SRS) ----------
+\usepackage[table]{xcolor}
+\definecolor{znavy}{HTML}{173A5E}   % headings, table headers
+\definecolor{zteal}{HTML}{1A9EAD}   % sub-headings
+\definecolor{zrow}{HTML}{F0F5FA}    % alternating table rows
+\definecolor{zline}{HTML}{B7C6D5}   % table rules
+\definecolor{znote}{HTML}{FFF6DB}   % call-out background
+\definecolor{znotebar}{HTML}{D9A21B}% call-out bar
+\definecolor{zpink}{HTML}{FBEDED}
+\definecolor{zmint}{HTML}{E3F4F1}
+\definecolor{zgreen}{HTML}{1E7B3A}
+\definecolor{zcode}{HTML}{F5F7F9}
+
+% ---------- Packages ----------
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{needspace}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+
+\graphicspath{{figures/}}
+
+% ---------- Headings ----------
+\setcounter{secnumdepth}{3}
+\titleformat{\section}{\LARGE\bfseries\color{znavy}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\Large\bfseries\color{zteal}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\large\bfseries\color{znavy}}{\thesubsubsection}{0.6em}{}
+\titleformat{\paragraph}[runin]{\normalsize\bfseries\color{znavy}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{6pt}{12pt}
+\titlespacing*{\subsection}{0pt}{14pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{4pt}
+\titlespacing*{\paragraph}{0pt}{8pt}{0.6em}
+
+% ---------- Lists ----------
+\setlist{itemsep=2pt,topsep=3pt,parsep=0pt}
+
+% ---------- Tables ----------
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{B}[1]{>{\raggedright\arraybackslash\leavevmode\bfseries\color{znavy}}p{#1}} % bold navy first column
+\newcolumntype{Z}{>{\centering\arraybackslash}X}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{5pt}
+\arrayrulecolor{zline}
+\newcommand{\hd}[1]{\leavevmode\textcolor{white}{\sffamily\bfseries #1}}   % header cell
+\newcommand{\headrow}{\rowcolor{znavy}}                            % header row
+\newcommand{\stripe}{\rowcolors{2}{white}{zrow}}                    % zebra rows
+
+% ---------- Captions ----------
+\captionsetup{font={small,sf},labelfont={bf,color=znavy},textfont={bf,color=znavy},
+  labelsep=endash,justification=raggedright,singlelinecheck=false,skip=4pt}
+\captionsetup[figure]{font={small,sf},labelfont={color=gray},textfont={color=gray},
+  justification=centering,singlelinecheck=true,skip=6pt}
+
+% ---------- Handy macros ----------
+\newcommand{\COtwo}{CO\textsubscript{2}}
+\newcommand{\tick}{\ensuremath{\checkmark}}
+\newcommand{\gtick}{\textcolor{zgreen}{\ensuremath{\checkmark}}}
+\newcommand{\cbox}{\ensuremath{\square}}
+
+% Call-out box (yellow, left bar) -- used for notes in the SRS
+\newtcolorbox{zcallout}{enhanced,breakable,colback=znote,colframe=znote,
+  borderline west={3pt}{0pt}{znotebar},arc=0pt,outer arc=0pt,
+  left=8pt,right=8pt,top=5pt,bottom=5pt,fontupper=\small,before skip=8pt,after skip=8pt}
+
+% Light-blue information box
+\newtcolorbox{zinfo}{enhanced,colback=zrow,colframe=zrow,arc=0pt,outer arc=0pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small,before skip=8pt,after skip=8pt}
+
+% Code listings
+\lstset{basicstyle=\ttfamily\scriptsize,columns=fullflexible,keepspaces=true,
+  breaklines=true,breakatwhitespace=false,showstringspaces=false,upquote=true,
+  frame=single,rulecolor=\color{zline},backgroundcolor=\color{zcode},
+  xleftmargin=4pt,xrightmargin=4pt,framexleftmargin=4pt,framexrightmargin=4pt,
+  aboveskip=8pt,belowskip=8pt,tabsize=4,
+  literate={≤}{{$\le$}}1 {≥}{{$\ge$}}1 {→}{{$\rightarrow$}}1 {–}{{--}}1}
+
+% ---------- Header and footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{znavy}{\ShortTitle}}
+\fancyhead[R]{\small\sffamily\textcolor{gray}{CS3151 -- Software Engineering}}
+\fancyfoot[L]{\footnotesize\sffamily\textcolor{gray}{CS3151/2026 \quad Dr.\ Passent Elkafrawy}}
+\fancyfoot[R]{\footnotesize\sffamily\textcolor{gray}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{zline}\leaders\hrule height \headrulewidth\hfill}}
+
+% ---------- Cover page ----------
+% Set \LabTitle, \ProjectTitle and \TeamMembers in main.tex before \begin{document}.
+\newcommand{\makecover}{%
+  \begin{titlepage}
+    \centering
+    \vspace*{1.2cm}
+    \includegraphics[width=3.6cm]{effat_logo.png}\par
+    \vspace{1.6cm}
+    {\Large\bfseries Course: CS3151 -- Software Engineering\par}
+    \vspace{0.35cm}
+    {\large\bfseries Project -- Fall 2026\par}
+    \vspace{0.15cm}
+    {\large\bfseries Instructor: Dr.\ Passent Elkafrawy\par}
+    \vspace{1.6cm}
+    {\large\bfseries \ProjectTitle\par}
+    \vspace{0.9cm}
+    {\color{znavy}\rule{0.55\linewidth}{0.6pt}\par}
+    \vspace{0.45cm}
+    {\LARGE\bfseries\color{znavy} \LabTitle\par}
+    \vspace{0.35cm}
+    {\color{znavy}\rule{0.55\linewidth}{0.6pt}\par}
+    \vfill
+    {\large\bfseries Done By:\par}
+    \vspace{0.4cm}
+    {\large \TeamMembers\par}
+    \vspace{2.2cm}
+  \end{titlepage}%
+}
+
+% Keep a run-in heading together with the text that follows it
+\newcommand{\keephead}[1]{\needspace{6\baselineskip}\paragraph{#1}\leavevmode\par\vspace{-\parskip}}
+
+% Never leave a heading stranded at the bottom of a page
+\usepackage{etoolbox}
+\pretocmd{\section}{\needspace{8\baselineskip}}{}{}
+\pretocmd{\subsection}{\needspace{6\baselineskip}}{}{}
+\pretocmd{\subsubsection}{\needspace{5\baselineskip}}{}{}
